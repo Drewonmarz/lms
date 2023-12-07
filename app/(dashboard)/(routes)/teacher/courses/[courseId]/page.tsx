@@ -31,9 +31,25 @@ const CourseIdPage = async ({
       id: params.courseId,
       userId
     },
-  
+    include: {
+      chapters: {
+        orderBy: {
+          position: "asc",
+        },
       },
-  )
+      attachments: {
+        orderBy: {
+          createdAt: "desc",
+        },
+      },
+    },
+  });
+
+  const categories = await db.category.findMany({
+    orderBy: {
+      name: "asc",
+    },
+  });
 
   if (!course) {
     return redirect("/");
@@ -46,7 +62,7 @@ const CourseIdPage = async ({
     course.price,
     course.categoryId,
     course.chapters.some(chapter => chapter.isPublished),
- ];
+  ];
 
   const totalFields = requiredFields.length;
   const completedFields = requiredFields.filter(Boolean).length;
