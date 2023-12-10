@@ -6,7 +6,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
-import { Button } from "@/components/ui/button";
+import { Button} from "@/components/ui/button";
 import { ConfirmModal } from "@/components/modals/confirm-modal";
 
 interface ChapterActionsProps {
